@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { config } from "../config";
 import { Header } from "../Components/Header";
 import { Loader } from '../Components/Common'
-import { BlogContainer } from '../Components/Blog'
+// import { BlogContainer } from '../Components/Blog'
 import { Card } from '../Components/Blog/Card'
 
 const GET_POSTS = gql`
@@ -57,15 +57,17 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <BlogContainer>
-        {
-          loading
-          ? <Loader />
-          : posts.map((v, i) => {
-              return <Card blog={v} key={i} />;
-            })
-        }
-      </BlogContainer>
+      <div className="container">
+        <div className="row">
+          {
+            loading
+            ? <Loader />
+            : posts.map((v, i) => {
+                return <Card blog={v} key={i} />;
+              })
+          }
+        </div>
+      </div>
     </>
   );
 }
