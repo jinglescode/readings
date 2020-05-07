@@ -98,12 +98,14 @@ export default function BlogHome() {
   );
 
   const CodeBlock = ({ children }) => (
-    <div className="highlight">
-      <pre className="highlight">
-        <code>
-          {children}
-        </code>
-      </pre>
+    <div class="language-plaintext highlighter-rouge">
+      <div className="highlight">
+        <pre className="highlight">
+          <code>
+            {children}
+          </code>
+        </pre>
+      </div>
     </div>
   );
 
@@ -183,10 +185,8 @@ export default function BlogHome() {
       {post.title && (
       <div className="container blog-content">
         <div className="card">
-          <div className="card-content">
-            <h1 className="title grey-text text-darken-4">{post.title}</h1>
-          </div>
           <div className="card-content blog-content">
+            <h1 className="title grey-text text-darken-4">{post.title}</h1>
             <Markdown options={{
                 overrides: {
                   a: {
