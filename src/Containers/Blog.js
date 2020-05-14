@@ -11,7 +11,7 @@ import { Card } from '../Components/Blog/Card'
 const GET_POSTS = gql`
 {
   repository(owner: "${config.githubUserName}", name: "${config.githubRepo}") {
-    issues(first: 100, states: OPEN, filterBy: { labels: "blog" }) {
+    issues(last: 100, states: OPEN, filterBy: { labels: "blog" }) {
       nodes {
         title
         body
@@ -47,11 +47,10 @@ const Blog = () => {
     let search_keywords = event.target.value;
 
     filteredData = posts.filter((data)=>{
-      // var matches = search_keywords.match(/\[(.*?)\]/);
-
 
       let search_tags = [];
 
+      // let matches = search_keywords.match(/\[(.*?)\]/);
       let matches = search_keywords.split('[')
       .filter(function(v){ return v.indexOf(']') > -1})
       .map( function(value) {
@@ -105,8 +104,10 @@ const Blog = () => {
         console.error(error)
       }
       if (data) {
-        setPosts(data?.repository?.issues?.nodes)
-        setFilteredData(data?.repository?.issues?.nodes);
+        let list_articles = data?.repository?.issues?.nodes;
+        list_articles.reverse();
+        setPosts(list_articles)
+        setFilteredData(list_articles);
       }
     }
   }, [loading, error, data]);
@@ -119,7 +120,7 @@ const Blog = () => {
         <div className="row">
           <div className="input-field col s6">
             <i className="material-icons prefix">search</i>
-            <input placeholder="search..." id="search" type="text" className="validate" onChange={(e)=>searchSpace(e)} />
+            <input placeholder="search article with keyword or use sqaure bracket to filter tags..." id="search" type="text" className="validate" onChange={(e)=>searchSpace(e)} />
           </div>
         </div>
 

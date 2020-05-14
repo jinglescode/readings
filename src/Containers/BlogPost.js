@@ -81,18 +81,20 @@ export default function BlogHome() {
   const H1 = ({ children }) => (
     <h1>
       {children}
-      <style jsx="true">
-        {`
-          h1 {
-            font-size: 2rem !important;
-          }
-        `}
-      </style>
     </h1>
   );
 
+  // IF wanna add hardcoded styles inside const H1.
+  // <style jsx="true">
+  //   {`
+  //     h1 {
+  //       font-size: 2rem !important;
+  //     }
+  //   `}
+  // </style>
+
   const HyperLink = ({ children, ...props }) => (
-    <a href={props.href} target="_blank" rel="noopener noreferrer">
+    <a href={props.href} target="_blank" rel="noopener noreferrer" className="truncate">
       {children}
     </a>
   );
@@ -181,7 +183,7 @@ export default function BlogHome() {
 
   return (
     <>
-      <Header title={post.title} />
+      <Header />
       {post.title && (
       <div className="container blog-content">
         <div className="card">
